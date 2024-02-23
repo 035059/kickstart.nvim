@@ -1,13 +1,12 @@
 return {
-    -- Set lualine as statusline
-    'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
-    opts = {
-      options = {
-        icons_enabled = false,
-        theme = 'auto',
-        component_separators = '|',
-        section_separators = '',
-      },
-    },
-  }
+	'L3MON4D3/LuaSnip',
+	build = (function()
+		if vim.fn.has 'win32' == 1 then
+			return
+		end
+		return 'make install_jsregexp'
+	end)(),
+	config = function()
+		require("luasnip.loaders.from_lua").load({paths = "~.config/nvim/snippets"})
+	end
+}

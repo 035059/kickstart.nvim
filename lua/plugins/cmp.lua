@@ -3,15 +3,7 @@ return {
   'hrsh7th/nvim-cmp',
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
-    {
-      'L3MON4D3/LuaSnip',
-      build = (function()
-        if vim.fn.has 'win32' == 1 then
-	  return
-        end
-        return 'make install_jsregexp'
-      end)(),
-    },
+  'L3MON4D3/LuaSnip',
   'saadparwaiz1/cmp_luasnip',
 
   -- Adds LSP completion capabilities
