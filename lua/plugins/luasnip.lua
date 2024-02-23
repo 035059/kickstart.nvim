@@ -7,6 +7,6 @@ return {
 		return 'make install_jsregexp'
 	end)(),
 	config = function()
-		require("luasnip.loaders.from_lua").load({paths = "~.config/nvim/snippets"})
+	require("luasnip.loaders.from_lua").load({ paths = "snippets" })
 	end
 }
