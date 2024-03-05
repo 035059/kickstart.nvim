@@ -1,4 +1,4 @@
-local helpers = require('personal.luasnip-helper-funcs')
+local helpers = require('config.luasnip-helper-funcs')
 local get_visual = helpers.get_visual
 
 -- Used to insert a ReST heading into a document; uses the second argument
