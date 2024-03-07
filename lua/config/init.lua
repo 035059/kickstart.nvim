@@ -15,6 +15,12 @@ vim.o.scrolloff = 8
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
+-- Set indent to 2 spaces
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.bo.softtabstop = 2
+
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
@@ -28,8 +34,10 @@ if vim.fn.has "wsl" == 1 then
       ["*"] = "clip.exe",
     },
     paste = {
-      ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-      ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ["+"] =
+      'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ["*"] =
+      'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
     },
     cache_enabled = 0,
   }
@@ -60,7 +68,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- Set colorscheme
-vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme "tokyonight-night"
 
 -- [[ Basic Keymaps ]]
 
@@ -79,7 +87,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Oil file browser keybinds
-vim.keymap.set('n', '-', "<CMD>Oil --float<CR>", { desc = "Open parent directory"})
+vim.keymap.set('n', '-', "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
