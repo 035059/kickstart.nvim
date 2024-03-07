@@ -9,7 +9,7 @@ return {
       columns = {
         "icon",
         "size",
-      }
+      },
     })
-  end
+  end,
 }
