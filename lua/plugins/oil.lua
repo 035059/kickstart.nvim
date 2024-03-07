@@ -10,6 +10,15 @@ return {
         "icon",
         "size",
       },
+      view_options = {
+        is_always_hidden = function(name, _)
+          return name == ".git"
+              or name == "lazy-lock.json"
+              or name == "."
+              or name == ".."
+              or string.match(name, "cache")
+        end
+      }
     })
   end,
 }

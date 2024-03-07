@@ -1,7 +1,9 @@
 local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
+local ascii = require("ascii")
 
 -- Set header
+--[[ Default header
 dashboard.section.header.val = {
   "                                                     ",
   "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
@@ -11,7 +13,8 @@ dashboard.section.header.val = {
   "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
   "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
   "                                                     ",
-}
+} ]]
+dashboard.section.header.val = ascii.get_random_global() --, "neovim")
 
 -- Set menu
 dashboard.section.buttons.val = {
