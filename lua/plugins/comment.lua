@@ -3,6 +3,8 @@ return {
   opts = {},
   lazy = false,
   config = function()
-    require('Comment').setup()
+    require('Comment').setup({
+      mappings = { basic = true, extra = true },
+    })
   end
 }
