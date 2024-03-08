@@ -33,7 +33,7 @@ local function git_commit()
   vim.cmd(string.format('Git commit -m "%s"<CR>', vim.fn.input('Commit message: ')))
 end
 wk.register({
-  G = {
+  g = {
     name = "Git",
     a = { "<CMD>Git add .<CR>", "Add file to git tracking" },
     A = { "<CMD>Git add *<CR>", "Add all files to git" },
