@@ -30,7 +30,7 @@ vim.keymap.set('n', '-', "<CMD>Oil --float<CR>", { desc = "Open parent directory
 
 -- Git keybinds
 local function git_commit()
-  vim.cmd(string.format('Git commit -m "%s"<CR>', vim.fn.input('Commit: ')))
+  vim.cmd(string.format('Git commit -m "%s"<CR>', vim.fn.input('Commit message: ')))
 end
 wk.register({
   G = {
