@@ -18,7 +18,10 @@ return {
               or name == ".."
               or string.match(name, "cache")
         end
-      }
+      },
+      keymaps = {
+        ["q"] = "actions.close",
+      },
     })
   end,
 }
