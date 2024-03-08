@@ -21,8 +21,8 @@ return {
       },
       keymaps = {
         ["q"] = "actions.close",
-        ["gc"] = "actions.cd",
-        ["gC"] = "actions.tcd",
+        ["gd"] = "actions.cd",
+        ["gD"] = "actions.tcd",
       },
     })
   end,
