@@ -6,7 +6,6 @@ wk.register {
   ['<leader>c'] = { name = 'Code', _ = 'which_key_ignore' },
   ['<leader>d'] = { name = 'Document', _ = 'which_key_ignore' },
   ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = 'Git Hunk', _ = 'which_key_ignore' },
   ['<leader>r'] = { name = 'Rename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = 'Search', _ = 'which_key_ignore' },
   ['<leader>t'] = { name = 'Toggle', _ = 'which_key_ignore' },
@@ -28,6 +27,17 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Oil keybinds
 vim.keymap.set('n', '-', "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
 
+-- Harpoon keybinds
+local mark = require('harpoon.mark')
+local ui = require('harpoon.ui')
+vim.keymap.set("n", "<A-h>", mark.add_file)
+vim.keymap.set("n", "<A-u>", ui.toggle_quick_menu)
+
+vim.keymap.set("n", "<A-j>", function() ui.nav_file(1) end)
+vim.keymap.set("n", "<A-k>", function() ui.nav_file(2) end)
+vim.keymap.set("n", "<A-l>", function() ui.nav_file(3) end)
+vim.keymap.set("n", "<A-;>", function() ui.nav_file(4) end)
+
 -- Git keybinds
 local function git_commit()
   vim.cmd(string.format('Git commit -m "%s"<CR>', vim.fn.input('Commit message: ')))
@@ -38,6 +48,8 @@ wk.register({
     a = { "<CMD>Git add .<CR>", "Add file to git tracking" },
     A = { "<CMD>Git add *<CR>", "Add all files to git" },
     c = { function() git_commit() end, "Create commit" },
+    -- this is a trial
+    h = { name = 'Git Hunk', _ = 'which_key_ignore' },
     p = { "<CMD>Git push<CR>", "Push to remote" },
     P = { "<CMD>Git pull<CR>", "Pull from remote" },
     s = { "<CMD>Git status<CR>", "Get git status" },
@@ -73,13 +85,14 @@ local function telescope_live_grep_open_files()
     prompt_title = 'Live Grep in Open Files',
   }
 end
+local tb = require('telescope.builtin')
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = 'Search in Open Files' })
-vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = 'Search Select Telescope' })
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search Git Files' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = 'Search Files' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = 'Search Help' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = 'Search current Word' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = 'Search by Grep' })
+vim.keymap.set('n', '<leader>ss', tb.builtin, { desc = 'Search Select Telescope' })
+vim.keymap.set('n', '<leader>gf', tb.git_files, { desc = 'Search Git Files' })
+vim.keymap.set('n', '<leader>sf', tb.find_files, { desc = 'Search Files' })
+vim.keymap.set('n', '<leader>sh', tb.help_tags, { desc = 'Search Help' })
+vim.keymap.set('n', '<leader>sw', tb.grep_string, { desc = 'Search current Word' })
+vim.keymap.set('n', '<leader>sg', tb.live_grep, { desc = 'Search by Grep' })
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = 'Search by Grep on Git Root' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = 'Search Diagnostics' })
-vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 'Search Resume' })
+vim.keymap.set('n', '<leader>sd', tb.diagnostics, { desc = 'Search Diagnostics' })
+vim.keymap.set('n', '<leader>sr', tb.resume, { desc = 'Search Resume' })
