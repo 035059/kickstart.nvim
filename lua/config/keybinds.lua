@@ -40,7 +40,7 @@ vim.keymap.set("n", "<A-;>", function() ui.nav_file(4) end)
 
 -- Git keybinds
 local function git_commit()
-  vim.cmd(string.format('Git commit -m "%s"<CR>', vim.fn.input('Commit message: ')))
+  vim.cmd(string.format('Git commit -m "%s"', vim.fn.input('Commit message: ')))
 end
 wk.register({
   g = {
@@ -48,7 +48,6 @@ wk.register({
     a = { "<CMD>Git add .<CR>", "Add file to git tracking" },
     A = { "<CMD>Git add *<CR>", "Add all files to git" },
     c = { function() git_commit() end, "Create commit" },
-    -- this is a trial
     h = { name = 'Git Hunk', _ = 'which_key_ignore' },
     p = { "<CMD>Git push<CR>", "Push to remote" },
     P = { "<CMD>Git pull<CR>", "Pull from remote" },
