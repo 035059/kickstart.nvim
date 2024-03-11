@@ -23,6 +23,7 @@ dashboard.section.buttons.val = {
   dashboard.button("r", "  > Recent", ":Telescope oldfiles<CR>"),
   dashboard.button("p", "  > Projects", ":Telescope projects<CR>"),
   dashboard.button("o", "  > File Explorer", ":Oil <CR>"),
+  dashboard.button('n', "󱞁 > Notes", ":Neorg workspace personal<CR>"),
   dashboard.button("c", "  > Config", ":e $MYVIMRC <CR>"), --| :cd %:p:h | split . | wincmd k | pwd<CR>"),
   dashboard.button("q", "󰗼  > Quit NVIM", ":qa<CR>"),
 }
