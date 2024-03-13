@@ -27,6 +27,9 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Oil keybinds
 vim.keymap.set('n', '-', "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
 
+-- Delete to black hole register
+vim.keymap.set('n', '<leader>d', '"_d')
+
 -- Harpoon keybinds
 local mark = require('harpoon.mark')
 local ui = require('harpoon.ui')
