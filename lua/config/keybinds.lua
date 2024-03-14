@@ -30,7 +30,7 @@ vim.keymap.set('n', '-', "<CMD>Oil --float<CR>", { desc = "Open parent directory
 -- Delete to black hole register
 vim.keymap.set('n', '<leader>d', '"_d')
 
--- Harpoon keybinds
+-- Harpoon keybinds (alt not 'A')
 local mark = require('harpoon.mark')
 local ui = require('harpoon.ui')
 vim.keymap.set("n", "<A-h>", mark.add_file)
