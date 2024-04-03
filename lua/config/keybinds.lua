@@ -2,15 +2,16 @@ local wk = require('which-key')
 
 -- [[ Which-key Configurations ]]
 -- document existing key chains
-wk.register {
-  ['<leader>c'] = { name = 'Code', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = 'Document', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore' },
-  ['<leader>r'] = { name = 'Rename', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = 'Search', _ = 'which_key_ignore' },
-  ['<leader>t'] = { name = 'Toggle', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = 'Workspace', _ = 'which_key_ignore' },
-}
+-- wk.register {
+--   ['<leader>c'] = { name = 'Code', _ = 'which_key_ignore' },
+--   ['<leader>d'] = { name = 'Document', _ = 'which_key_ignore' },
+--   ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore' },
+--   ['<leader>r'] = { name = 'Rename', _ = 'which_key_ignore' },
+--   ['<leader>s'] = { name = 'Search', _ = 'which_key_ignore' },
+--   ['<leader>t'] = { name = 'Toggle', _ = 'which_key_ignore' },
+--   ['<leader>w'] = { name = 'Workspace', _ = 'which_key_ignore' },
+-- }
+
 -- register which-key VISUAL mode
 -- required for visual <leader>hs (hunk stage) to work
 wk.register({
@@ -26,9 +27,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- Oil keybinds
 vim.keymap.set('n', '-', "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
-
--- Delete to black hole register
-vim.keymap.set('n', '<leader>d', '"_d')
 
 -- Harpoon keybinds (alt not 'A')
 local mark = require('harpoon.mark')
@@ -60,14 +58,19 @@ wk.register({
 
 -- Debugging keymaps
 local dap = require('dap')
-vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
-vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
-vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
-vim.keymap.set('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
-vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
-vim.keymap.set('n', '<leader>B', function()
-  dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-end, { desc = 'Debug: Set Breakpoint' })
+wk.register({
+  d = {
+    name = "DAP",
+    a = { dap.continue, "Debug: Start/Continue" },
+    r = { dap.run_last, "Debug: Run Last" },
+    R = { dap.repl.open, "Debug: Open Repl" },
+    i = { dap.step_into, "Debug: Step Into" },
+    o = { dap.step_over, "Debug: Step Over" },
+    O = { dap.step_out, "Debug: Step Out" },
+    b = { dap.toggle_breakpoint, "Debug: Toggle Breakpoint" },
+    B = { function() dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ') end, "Debug: Set Breakpoint" },
+  }
+}, { prefix = "<leader>" })
 
 -- Telescope keymaps
 -- See `:help telescope.builtin`
