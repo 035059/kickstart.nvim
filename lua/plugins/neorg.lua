@@ -27,7 +27,7 @@ local modules = {
 	["core.keybinds"] = {
 		config = {
 			default_keybinds = true,
-			neorg_leader = "<Leader><Leader>",
+			neorg_leader = "<Leader>n",
 		},
 	},
 	["core.dirman"] = { -- Manages Neorg workspaces
