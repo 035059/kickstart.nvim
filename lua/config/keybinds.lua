@@ -73,6 +73,13 @@ wk.register({
 	},
 }, { prefix = "<leader>" })
 
+-- Comment.nvim keybinds
+local api = require("Comment.api")
+local comment = require("Comment.config"):get()
+
+vim.keymap.set("n", "<C-/>", api.toggle.linewise.current)
+vim.keymap.set("n", "<C-.>", api.toggle.blockwise.current)
+
 -- Debugging keymaps
 local dap = require("dap")
 wk.register({
