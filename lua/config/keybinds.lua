@@ -2,22 +2,13 @@ local wk = require("which-key")
 
 -- [[ Which-key Configurations ]]
 -- document existing key chains
--- wk.register {
---   ['<leader>c'] = { name = 'Code', _ = 'which_key_ignore' },
---   ['<leader>d'] = { name = 'Document', _ = 'which_key_ignore' },
---   ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore' },
---   ['<leader>r'] = { name = 'Rename', _ = 'which_key_ignore' },
---   ['<leader>s'] = { name = 'Search', _ = 'which_key_ignore' },
---   ['<leader>t'] = { name = 'Toggle', _ = 'which_key_ignore' },
---   ['<leader>w'] = { name = 'Workspace', _ = 'which_key_ignore' },
--- }
 
 -- register which-key VISUAL mode
 -- required for visual <leader>hs (hunk stage) to work
-wk.register({
-	["<leader>"] = { name = "VISUAL <leader>" },
-	["<leader>h"] = { "Git Hunk" },
-}, { mode = "v" })
+wk.add({
+	{ "<leader>", group = "VISUAL <leader>", mode = "v" },
+	{ "<leader>h", desc = "Git Hunk", mode = "v" },
+})
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
@@ -51,27 +42,45 @@ vim.keymap.set("n", "<A-;>", function()
 	ui.nav_file(4)
 end)
 
+-- Spell Check keybinds
+
+wk.add({
+	{ "<leader>p", group = "Spellcheck" },
+	{ "<leader>po", "<CMD>setlocal spell spelllang=en_ca<CR>", desc = "Start Spellcheck" },
+})
+
+-- Copilot keybinds
+vim.keymap.set("i", "<S-Tab>", 'copilot#Accept("\\<CR>")', {
+	expr = true,
+	replace_keycodes = false,
+})
+vim.g.copilot_no_tab_map = true
+
 -- Git keybinds
 local function git_commit()
 	vim.cmd(string.format('Git commit -m "%s"', vim.fn.input("Commit message: ")))
 end
-wk.register({
-	g = {
-		name = "Git",
-		a = { "<CMD>Git add .<CR>", "Add file to git tracking" },
-		A = { "<CMD>Git add *<CR>", "Add all files to git" },
-		c = {
-			function()
-				git_commit()
-			end,
-			"Create commit",
-		},
-		h = { name = "Git Hunk", _ = "which_key_ignore" },
-		p = { "<CMD>Git push<CR>", "Push to remote" },
-		P = { "<CMD>Git pull<CR>", "Pull from remote" },
-		s = { "<CMD>Git status<CR>", "Get git status" },
+-- c = {
+-- 	function()
+-- 		git_commit()
+-- 	end,
+-- 	"Create commit",
+-- },
+wk.add({
+	{ "<leader>g", group = "Git" },
+	{ "<leader>ga", "<CMD>Git add %<CR>", desc = "Add file to git tracking" },
+	{ "<leader>gA", "<CMD>Git add *<CR>", desc = "Add all files to git tracking" },
+	{
+		"<leader>gc",
+		function()
+			git_commit()
+		end,
+		desc = "Create commit",
 	},
-}, { prefix = "<leader>" })
+	{ "<leader>p", "<CMD>Git push<CR>", desc = "Push to remote" },
+	{ "<leader>P", "<CMD>Git pull<CR>", desc = "Pull from remote" },
+	{ "<leader>s", "<CMD>Git status<CR>", desc = "Get git status" },
+})
 
 -- Comment.nvim keybinds
 local api = require("Comment.api")
@@ -79,27 +88,6 @@ local comment = require("Comment.config"):get()
 
 vim.keymap.set("n", "<C-/>", api.toggle.linewise.current)
 vim.keymap.set("n", "<C-.>", api.toggle.blockwise.current)
-
--- Debugging keymaps
-local dap = require("dap")
-wk.register({
-	d = {
-		name = "DAP",
-		a = { dap.continue, "Debug: Start/Continue" },
-		r = { dap.run_last, "Debug: Run Last" },
-		R = { dap.repl.open, "Debug: Open Repl" },
-		i = { dap.step_into, "Debug: Step Into" },
-		o = { dap.step_over, "Debug: Step Over" },
-		O = { dap.step_out, "Debug: Step Out" },
-		b = { dap.toggle_breakpoint, "Debug: Toggle Breakpoint" },
-		B = {
-			function()
-				dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-			end,
-			"Debug: Set Breakpoint",
-		},
-	},
-}, { prefix = "<leader>" })
 
 -- Telescope keymaps
 -- See `:help telescope.builtin`
