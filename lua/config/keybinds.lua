@@ -42,6 +42,18 @@ vim.keymap.set("n", "<A-;>", function()
 	ui.nav_file(4)
 end)
 
+-- Toggleterm keybinds
+function _G.set_terminal_keymaps()
+	local opts = { buffer = 0 }
+	vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+	vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
+	vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
+	vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
+	vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
+	vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
+	vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
+end
+vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
 -- Spell Check keybinds
 
 wk.add({
@@ -77,9 +89,9 @@ wk.add({
 		end,
 		desc = "Create commit",
 	},
-	{ "<leader>p", "<CMD>Git push<CR>", desc = "Push to remote" },
-	{ "<leader>P", "<CMD>Git pull<CR>", desc = "Pull from remote" },
-	{ "<leader>s", "<CMD>Git status<CR>", desc = "Get git status" },
+	{ "<leader>gp", "<CMD>Git push<CR>", desc = "Push to remote" },
+	{ "<leader>gP", "<CMD>Git pull<CR>", desc = "Pull from remote" },
+	{ "<leader>gs", "<CMD>Git status<CR>", desc = "Get git status" },
 })
 
 -- Comment.nvim keybinds
@@ -107,6 +119,7 @@ local function telescope_live_grep_open_files()
 		prompt_title = "Live Grep in Open Files",
 	})
 end
+
 local tb = require("telescope.builtin")
 vim.keymap.set("n", "<leader>s/", telescope_live_grep_open_files, { desc = "Search in Open Files" })
 vim.keymap.set("n", "<leader>ss", tb.builtin, { desc = "Search Select Telescope" })
