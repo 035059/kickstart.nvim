@@ -17,7 +17,9 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open float
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- Oil keybinds
-vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+-- Opens oil as a float
+-- vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
 
 -- Nabla (inline math)
 vim.keymap.set("n", "<leader>p", require("nabla").popup, { desc = "Show math popup" })
