@@ -14,6 +14,7 @@ dashboard.section.header.val = {
 	"  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
 	"                                                     ",
 }
+-- Use This to get a random image (but they could be differtn sizes)
 --dashboard.section.header.val = ascii.get_random_global()
 
 -- Set menu
