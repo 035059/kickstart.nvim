@@ -8,9 +8,11 @@ return {
 		vim.g.vimtex_compiler_latexmk = {
 			options = {
 				"-pdf",
+				"-pdflatex=lualatex",
 				"-shell-escape",
 				"-verbose",
 				"-file-line-error",
+				-- "-output-directory=build",
 				"-synctex=1",
 				"-interaction=nonstopmode",
 			},

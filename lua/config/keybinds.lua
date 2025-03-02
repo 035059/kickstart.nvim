@@ -18,31 +18,10 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 
 -- Oil keybinds
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
--- Opens oil as a float
--- vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
 
 -- Nabla (inline math)
 vim.keymap.set("n", "<leader>p", require("nabla").popup, { desc = "Show math popup" })
 vim.keymap.set("n", "<leader>P", require("nabla").toggle_virt, { desc = "Toggle global math" })
-
--- Harpoon keybinds (alt not 'A')
-local mark = require("harpoon.mark")
-local ui = require("harpoon.ui")
-vim.keymap.set("n", "<A-h>", mark.add_file)
-vim.keymap.set("n", "<A-u>", ui.toggle_quick_menu)
-
-vim.keymap.set("n", "<A-j>", function()
-	ui.nav_file(1)
-end)
-vim.keymap.set("n", "<A-k>", function()
-	ui.nav_file(2)
-end)
-vim.keymap.set("n", "<A-l>", function()
-	ui.nav_file(3)
-end)
-vim.keymap.set("n", "<A-;>", function()
-	ui.nav_file(4)
-end)
 
 -- Toggleterm keybinds
 function _G.set_terminal_keymaps()
@@ -56,8 +35,8 @@ function _G.set_terminal_keymaps()
 	vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 end
 vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
--- Spell Check keybinds
 
+-- Spell Check keybinds
 wk.add({
 	{ "<leader>p", group = "Spellcheck" },
 	{ "<leader>po", "<CMD>setlocal spell spelllang=en_ca<CR>", desc = "Start Spellcheck" },
@@ -74,12 +53,6 @@ vim.g.copilot_no_tab_map = true
 local function git_commit()
 	vim.cmd(string.format('Git commit -m "%s"', vim.fn.input("Commit message: ")))
 end
--- c = {
--- 	function()
--- 		git_commit()
--- 	end,
--- 	"Create commit",
--- },
 wk.add({
 	{ "<leader>g", group = "Git" },
 	{ "<leader>ga", "<CMD>Git add %<CR>", desc = "Add file to git tracking" },

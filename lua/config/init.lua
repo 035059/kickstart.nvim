@@ -10,7 +10,7 @@ vim.wo.number = true
 vim.o.relativenumber = true
 
 -- Keep cursor away from edge of screen
-vim.o.scrolloff = 8
+vim.o.scrolloff = 16
 
 -- Enable mouse mode
 vim.o.mouse = "a"
