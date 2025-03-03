@@ -36,6 +36,30 @@ function _G.set_terminal_keymaps()
 end
 vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
 
+-- Twiddlecase (cycles selection between UPPER CASE, lower case, and Title Case)
+local function twiddle_case(str)
+	if str == string.upper(str) then
+		return string.lower(str)
+	elseif str == string.lower(str) then
+		return string.gsub(str, "(%w)(%w*)", function(first, rest)
+			return string.upper(first) .. rest
+		end)
+	else
+		return string.upper(str)
+	end
+end
+
+-- Register the function globally so it can be called from Vimscript
+_G.twiddle_case = twiddle_case
+
+-- Set up the mapping
+vim.api.nvim_set_keymap(
+	"v",
+	"~",
+	[[y<cmd>lua vim.fn.setreg('', _G.twiddle_case(vim.fn.getreg('"')), vim.fn.getregtype(''))<CR>gv""Pgv]],
+	{ noremap = true, silent = true }
+)
+
 -- Spell Check keybinds
 wk.add({
 	{ "<leader>p", group = "Spellcheck" },

@@ -15,6 +15,9 @@ vim.o.scrolloff = 16
 -- Enable mouse mode
 vim.o.mouse = "a"
 
+-- Keep the directory set to the current one
+vim.opt.autochdir = true
+
 -- Set indent to 2 spaces
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2

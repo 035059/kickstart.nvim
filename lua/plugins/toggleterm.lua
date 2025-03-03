@@ -9,6 +9,9 @@ return {
 				return vim.o.columns * 0.4
 			end
 		end,
-		autochdir = true,
+		open_mapping = [[<C-t>]],
+	},
+	winbar = {
+		enabled = true,
 	},
 }
