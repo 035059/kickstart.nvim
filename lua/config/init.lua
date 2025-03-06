@@ -10,10 +10,13 @@ vim.wo.number = true
 vim.o.relativenumber = true
 
 -- Keep cursor away from edge of screen
-vim.o.scrolloff = 8
+vim.o.scrolloff = 16
 
 -- Enable mouse mode
 vim.o.mouse = "a"
+
+-- Keep the directory set to the current one
+vim.opt.autochdir = true
 
 -- Set indent to 2 spaces
 vim.opt.tabstop = 2
