@@ -8,6 +8,9 @@ return {
 		else
 			vim.g.vimtex_view_method = "zathura"
 		end
+		vim.g.tex_flavor = "latex"
+		vim.g.vimtex_syntax_enabled = 1
+		vim.g.vimtex_quickfix_autoclose_after_keystrokes = 10
 		vim.g.vimtex_compiler_latexmk = {
 			options = {
 				"-pdf",
