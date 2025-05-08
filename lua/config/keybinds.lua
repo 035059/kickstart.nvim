@@ -62,16 +62,8 @@ vim.api.nvim_set_keymap(
 
 -- Spell Check keybinds
 wk.add({
-	{ "<leader>p", group = "Spellcheck" },
 	{ "<leader>po", "<CMD>setlocal spell spelllang=en_ca<CR>", desc = "Start Spellcheck" },
 })
-
--- Copilot keybinds
-vim.keymap.set("i", "<S-Tab>", 'copilot#Accept("\\<CR>")', {
-	expr = true,
-	replace_keycodes = false,
-})
-vim.g.copilot_no_tab_map = true
 
 -- Git keybinds
 local function git_commit()
@@ -130,3 +122,4 @@ vim.keymap.set("n", "<leader>sg", tb.live_grep, { desc = "Search by Grep" })
 vim.keymap.set("n", "<leader>sG", ":LiveGrepGitRoot<cr>", { desc = "Search by Grep on Git Root" })
 vim.keymap.set("n", "<leader>sd", tb.diagnostics, { desc = "Search Diagnostics" })
 vim.keymap.set("n", "<leader>sr", tb.resume, { desc = "Search Resume" })
+vim.keymap.set("n", "<leader>sk", tb.keymaps, { desc = "Search Keymaps" })
