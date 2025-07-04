@@ -22,7 +22,7 @@ dashboard.section.buttons.val = {
 	dashboard.button("e", "  > New file", ":ene <BAR> startinsert <CR>"),
 	dashboard.button("f", "󰈞  > Find file", ":cd $HOME/ | Telescope find_files<CR>"),
 	dashboard.button("r", "  > Recent", ":Telescope oldfiles<CR>"),
-	-- DELETED dashboard.button("p", "  > Projects", ":Telescope projects<CR>"),
+	dashboard.button("p", "  > Projects", ":Telescope projects<CR>"),
 	dashboard.button("o", "  > File Explorer", ":Oil <CR>"),
 	dashboard.button("n", "󱞁 > Notes", ":Neorg workspace personal<CR>"),
 	dashboard.button("c", "  > Config", ":e $MYVIMRC <CR>"), --| :cd %:p:h | split . | wincmd k | pwd<CR>"),
