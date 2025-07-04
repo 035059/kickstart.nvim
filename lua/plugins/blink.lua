@@ -26,9 +26,6 @@ return {
 					},
 					menu = {
 						draw = {
-							icons = true,
-							kind_text = true,
-							border = "single",
 							treesitter = {
 								enabled = true,
 							},
