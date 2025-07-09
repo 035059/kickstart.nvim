@@ -15,8 +15,8 @@ return {
 			integrations = {
 				-- Fixes lspconfig's workspace management for LuaLS
 				lspconfig = true,
-				-- Add the cmp source for completion
-				cmp = true,
+				-- Use blink.cmp instead of nvim-cmp
+				blink = true,
 			},
 		},
 	},

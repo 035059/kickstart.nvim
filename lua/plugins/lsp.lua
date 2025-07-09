@@ -1,4 +1,3 @@
--- ~/.config/nvim/lua/plugins/lsp.lua
 return {
 	-- Mason for managing LSP servers, DAP servers, linters, and formatters
 	{
@@ -7,7 +6,6 @@ return {
 			require("mason").setup()
 		end,
 	},
-
 	-- Integration with lspconfig
 	{
 		"williamboman/mason-lspconfig.nvim",
@@ -25,7 +23,6 @@ return {
 			local on_attach = function(client, bufnr)
 				-- Enable completion triggered by <c-x><c-o>
 				vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
 				-- LSP key mappings
 				local opts = { noremap = true, silent = true, buffer = bufnr }
 				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -58,19 +55,24 @@ return {
 							capabilities = capabilities,
 						})
 					end,
-
 					-- Special configuration for lua_ls
 					["lua_ls"] = function()
 						require("lspconfig").lua_ls.setup({
 							on_attach = on_attach,
 							capabilities = capabilities,
+							filetypes = { "lua" },
 							settings = {
 								Lua = {
 									diagnostics = {
 										globals = { "vim" }, -- Recognize 'vim' global
 									},
 									workspace = {
-										library = vim.api.nvim_get_runtime_file("", true),
+										-- Only include Neovim's Lua runtime, not all files
+										library = {
+											vim.env.VIMRUNTIME .. "/lua",
+											vim.env.VIMRUNTIME .. "/lua/vim/lsp",
+											"${3rd}/luv/library",
+										},
 										checkThirdParty = false,
 									},
 									telemetry = { enable = false },
@@ -82,7 +84,6 @@ return {
 			})
 		end,
 	},
-
 	-- Core LSP configuration plugin
 	{
 		"neovim/nvim-lspconfig",
