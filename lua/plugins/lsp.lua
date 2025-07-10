@@ -55,31 +55,6 @@ return {
 							capabilities = capabilities,
 						})
 					end,
-					-- Special configuration for lua_ls
-					["lua_ls"] = function()
-						require("lspconfig").lua_ls.setup({
-							on_attach = on_attach,
-							capabilities = capabilities,
-							filetypes = { "lua" },
-							settings = {
-								Lua = {
-									diagnostics = {
-										globals = { "vim" }, -- Recognize 'vim' global
-									},
-									workspace = {
-										-- Only include Neovim's Lua runtime, not all files
-										library = {
-											vim.env.VIMRUNTIME .. "/lua",
-											vim.env.VIMRUNTIME .. "/lua/vim/lsp",
-											"${3rd}/luv/library",
-										},
-										checkThirdParty = false,
-									},
-									telemetry = { enable = false },
-								},
-							},
-						})
-					end,
 				},
 			})
 		end,
