@@ -3,7 +3,6 @@ local M = {
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
 		"nvim-treesitter/nvim-treesitter-textobjects",
-		"nvim-cmp",
 		"nvim-lua/plenary.nvim",
 	},
 	build = ":Neorg sync-parsers",
@@ -15,8 +14,6 @@ local M = {
 
 local modules = {
 	["core.defaults"] = {}, -- Loads default behaviour
-	["core.completion"] = { config = { engine = "nvim-cmp", name = "[Norg]" } },
-	["core.integrations.nvim-cmp"] = {},
 	["core.concealer"] = { -- Adds pretty icons to documents
 		config = {
 			icon_preset = "diamond",

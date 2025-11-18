@@ -14,6 +14,7 @@ return {
 					"cpp",
 					"go",
 					"lua",
+					"latex",
 					"python",
 					"rust",
 					"tsx",
@@ -34,8 +35,12 @@ return {
 				modules = {},
 				highlight = {
 					enable = true,
+					disable = { "latex" },
 				},
-				indent = { enable = true },
+				indent = {
+					enable = true,
+					disable = { "latex" },
+				},
 				incremental_selection = {
 					enable = true,
 					keymaps = {

@@ -24,12 +24,15 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.bo.softtabstop = 2
 
--- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
-vim.o.clipboard = "unnamedplus"
--- If install is on WSL, this makes the clipboard work
+-- Clipboard disabled for better insert mode performance
+-- Use "+y and "+p for explicit system clipboard access
+-- See `:help 'clipboard'`
+
+-- Platform-specific clipboard configuration
+--[[
 if vim.fn.has("wsl") == 1 then
+	-- WSL: Use Windows clipboard
+	vim.o.clipboard = "unnamedplus"
 	vim.g.clipboard = {
 		name = "WslClipboard",
 		copy = {
@@ -42,7 +45,29 @@ if vim.fn.has("wsl") == 1 then
 		},
 		cache_enabled = 0,
 	}
+elseif vim.fn.has("linux") == 1 then
+	-- Linux: Use faster clipboard provider with caching
+	vim.o.clipboard = "unnamedplus"
+	if vim.fn.executable("xsel") == 1 then
+		-- Use xsel (faster than wl-clipboard on some systems)
+		vim.g.clipboard = {
+			name = "xsel",
+			copy = {
+				["+"] = "xsel --nodetach -i -b",
+				["*"] = "xsel --nodetach -i -p",
+			},
+			paste = {
+				["+"] = "xsel -o -b",
+				["*"] = "xsel -o -p",
+			},
+			cache_enabled = 1,
+		}
+	end
+else
+	-- Other platforms (macOS, etc.): Use default
+	vim.o.clipboard = "unnamedplus"
 end
+--]]
 
 -- Enable break indent for linewrapping
 vim.o.breakindent = true

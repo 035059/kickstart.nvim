@@ -11,7 +11,7 @@ return {
 			lua = { "stylua" },
 			rust = { "rustfmt" },
 			python = { "isort", "black" },
-			tex = { "llf" },
+			tex = { "tex-fmt" },
 		},
 	},
 }

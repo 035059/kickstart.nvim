@@ -1,5 +1,6 @@
 return {
 	"lervag/vimtex",
+	lazy = false,
 	config = function()
 		local is_wsl = vim.fn.has("unix") and vim.fn.system("uname -r"):lower():match("microsoft") ~= nil
 		if is_wsl then

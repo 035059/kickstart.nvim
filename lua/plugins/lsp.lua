@@ -46,6 +46,7 @@ return {
 					"lua_ls",
 					"pyright",
 					"rust_analyzer",
+					"texlab",
 				},
 				-- Configure handlers for each server
 				handlers = {

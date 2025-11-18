@@ -20,7 +20,7 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- Nabla (inline math)
-vim.keymap.set("n", "<leader>p", require("nabla").popup, { desc = "Show math popup" })
+-- vim.keymap.set("n", "<leader>p", require("nabla").popup, { desc = "Show math popup" })
 vim.keymap.set("n", "<leader>P", require("nabla").toggle_virt, { desc = "Toggle global math" })
 
 -- Toggleterm keybinds
