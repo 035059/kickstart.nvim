@@ -1,66 +1,45 @@
 return {
-	-- Mason for managing LSP servers, DAP servers, linters, and formatters
 	{
-		"williamboman/mason.nvim",
-		config = function()
-			require("mason").setup()
-		end,
+		"mason-org/mason.nvim",
+		opts = {},
 	},
-	-- Integration with lspconfig
 	{
-		"williamboman/mason-lspconfig.nvim",
+		"mason-org/mason-lspconfig.nvim",
 		dependencies = {
-			"williamboman/mason.nvim",
+			"mason-org/mason.nvim",
 			"neovim/nvim-lspconfig",
 		},
-		config = function()
-			-- Configure LSP capabilities to work with completion
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities =
-				vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities({}, false))
-
-			-- Setup common on_attach for all servers
-			local on_attach = function(client, bufnr)
-				-- Enable completion triggered by <c-x><c-o>
-				vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-				-- LSP key mappings
-				local opts = { noremap = true, silent = true, buffer = bufnr }
-				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-				vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-				vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-				vim.keymap.set("n", "<leader>f", function()
-					vim.lsp.buf.format({ async = true })
-				end, opts)
-			end
-
-			require("mason-lspconfig").setup({
-				-- Automatically install LSP servers
-				automatic_installation = true,
-				-- Specify servers you want to use
-				ensure_installed = {
-					"lua_ls",
-					"pyright",
-					"rust_analyzer",
-					"texlab",
-				},
-				-- Configure handlers for each server
-				handlers = {
-					function(server_name)
-						require("lspconfig")[server_name].setup({
-							on_attach = on_attach,
-							capabilities = capabilities,
-						})
-					end,
-				},
+		opts = {
+			ensure_installed = {
+				"lua_ls",
+				"pyright",
+				"rust_analyzer",
+				"texlab",
+			},
+		},
+		config = function(_, opts)
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("UserLspKeymaps", { clear = true }),
+				callback = function(ev)
+					local function map(lhs, rhs, desc)
+						vim.keymap.set("n", lhs, rhs, { buffer = ev.buf, desc = desc })
+					end
+					map("gd", vim.lsp.buf.definition, "Go to definition")
+					map("gD", vim.lsp.buf.declaration, "Go to declaration")
+					map("gi", vim.lsp.buf.implementation, "Go to implementation")
+					map("gr", vim.lsp.buf.references, "Find references")
+					map("<C-k>", vim.lsp.buf.signature_help, "Signature help")
+					map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
+					map("<leader>ca", vim.lsp.buf.code_action, "Code action")
+					map("<leader>f", function()
+						vim.lsp.buf.format({ async = true })
+					end, "Format buffer")
+				end,
 			})
+
+			require("mason-lspconfig").setup(opts)
 		end,
 	},
-	-- Core LSP configuration plugin
 	{
 		"neovim/nvim-lspconfig",
 	},

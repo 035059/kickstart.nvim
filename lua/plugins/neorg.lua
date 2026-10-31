@@ -5,7 +5,6 @@ local M = {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"nvim-lua/plenary.nvim",
 	},
-	build = ":Neorg sync-parsers",
 	-- tag = "*",
 	lazy = true, -- enable lazy load
 	ft = "norg", -- lazy load on file type

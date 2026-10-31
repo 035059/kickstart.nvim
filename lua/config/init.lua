@@ -22,7 +22,7 @@ vim.o.mouse = "a"
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
-vim.bo.softtabstop = 2
+vim.opt.softtabstop = 2
 
 -- Clipboard disabled for better insert mode performance
 -- Use "+y and "+p for explicit system clipboard access
@@ -95,6 +95,8 @@ vim.o.completeopt = "menuone,noselect"
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+vim.diagnostic.config({ virtual_text = true })
+
 -- Disable Pearl provider
 vim.g.loaded_perl_provider = 0
 
@@ -113,11 +115,11 @@ vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
+-- See `:help vim.hl.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
-		vim.highlight.on_yank()
+		vim.hl.on_yank()
 	end,
 	group = highlight_group,
 	pattern = "*",

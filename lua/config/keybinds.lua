@@ -3,16 +3,11 @@ local wk = require("which-key")
 -- [[ Which-key Configurations ]]
 -- document existing key chains
 
--- register which-key VISUAL mode
--- required for visual <leader>hs (hunk stage) to work
 wk.add({
-	{ "<leader>", group = "VISUAL <leader>", mode = "v" },
-	{ "<leader>h", desc = "Git Hunk", mode = "v" },
+	{ "<leader>h", group = "Git Hunk", mode = { "n", "v" } },
 })
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
@@ -85,12 +80,9 @@ wk.add({
 	{ "<leader>gs", "<CMD>Git status<CR>", desc = "Get git status" },
 })
 
--- Comment.nvim keybinds
-local api = require("Comment.api")
-local comment = require("Comment.config"):get()
-
-vim.keymap.set("n", "<C-/>", api.toggle.linewise.current)
-vim.keymap.set("n", "<C-.>", api.toggle.blockwise.current)
+-- Built-in commenting (:h commenting)
+vim.keymap.set("n", "<C-/>", "gcc", { remap = true, desc = "Toggle comment line" })
+vim.keymap.set("x", "<C-/>", "gc", { remap = true, desc = "Toggle comment selection" })
 
 -- Telescope keymaps
 -- See `:help telescope.builtin`

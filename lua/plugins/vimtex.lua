@@ -1,9 +1,8 @@
 return {
 	"lervag/vimtex",
 	lazy = false,
-	config = function()
-		local is_wsl = vim.fn.has("unix") and vim.fn.system("uname -r"):lower():match("microsoft") ~= nil
-		if is_wsl then
+	init = function()
+		if vim.fn.has("wsl") == 1 then
 			vim.g.vimtex_view_general_viewer = "sumatrapdf.exe"
 			vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
 		else

@@ -1,5 +1,5 @@
 return {
-	"akinsho/nvim-toggleterm.lua",
+	"akinsho/toggleterm.nvim",
 	opts = {
 		-- size can be a number or function which is passed the current terminal
 		size = function(term)
@@ -21,13 +21,6 @@ return {
 			"n",
 			"<A-t>",
 			"<cmd>ToggleTerm direction=vertical<CR>",
-			{ noremap = true, silent = true }
-		)
-		-- Mapping to horizontal split terminal
-		vim.api.nvim_set_keymap(
-			"n",
-			"<C-t>",
-			"<cmd>ToggleTerm direction=horizontal<CR>",
 			{ noremap = true, silent = true }
 		)
 	end,
