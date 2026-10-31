@@ -41,6 +41,14 @@ return {
 		end,
 	},
 	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		dependencies = { "mason-org/mason.nvim" },
+		opts = {
+			-- formatters used by conform.nvim
+			ensure_installed = { "stylua", "black", "isort", "tex-fmt" },
+		},
+	},
+	{
 		"neovim/nvim-lspconfig",
 	},
 }
